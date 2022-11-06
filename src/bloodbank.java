@@ -145,6 +145,19 @@ public class bloodbank {
                     break;
                 case 5:
                     System.out.println("Delete details");
+                    System.out.println("Enter the blood id to be deleted:");
+                    bid=sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbank1","root","");
+                        String sql ="DELETE FROM `bloodbank` WHERE `bid`="+String.valueOf(bid);
+                        Statement stmt=con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully.....");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case  6:
                     System.exit(0);
