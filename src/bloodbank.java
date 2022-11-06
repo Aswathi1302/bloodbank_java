@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class bloodbank {
@@ -18,11 +16,11 @@ public class bloodbank {
         while (true)
         {
             System.out.println("Select the option");
-            System.out.println("1.Add Food");
-            System.out.println("2.View all Food");
-            System.out.println("3.Search Food");
-            System.out.println("4.update food");
-            System.out.println("5.Delete dood ");
+            System.out.println("1.Add Blood details");
+            System.out.println("2.View Blood details");
+            System.out.println("3.Search Blood details");
+            System.out.println("4.update blood details");
+            System.out.println("5.Delete blood details");
             System.out.println("6.Exit ");
             System.out.println("*****************");
             System.out.println("ENTER YOUR CHOICE:--");
@@ -64,6 +62,31 @@ public class bloodbank {
                     break;
                 case  2:
                     System.out.println("view all details of blood table");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbank1","root","");
+                        String sql="SELECT  `bid`, `donername`, `place`, `bloodgroup`, `age`, `phone` FROM `bloodbank` ";
+                        Statement stmt=con.createStatement();
+                        ResultSet rs=stmt.executeQuery(sql);
+                        while ((rs.next())) {
+                            String getbid = rs.getString(("bid"));
+                            String getdonername= rs.getString(("donername"));
+                            String getplace = rs.getString(("place"));
+                            String getbloodgroup = rs.getString(("bloodgroup"));
+                            String getage = rs.getString(("age"));
+                            String getphone = rs.getString(("phone"));
+                            System.out.println("Blood id=" + getbid);
+                            System.out.println("Doner Name=" + getdonername);
+                            System.out.println("place=" + getplace);
+                            System.out.println("bloodgroup=" + getbloodgroup);
+                            System.out.println("age=" + getage);
+                            System.out.println("phone=" + getphone);
+                            System.out.println("\n");
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                     break;
                 case 3:
                     System.out.println("Search blood details");
