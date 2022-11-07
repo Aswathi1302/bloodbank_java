@@ -21,7 +21,8 @@ public class bloodbank {
             System.out.println("3.Search Blood details");
             System.out.println("4.update blood details");
             System.out.println("5.Delete blood details");
-            System.out.println("6.Exit ");
+            System.out.println("6.Search name of name by character ");
+            System.out.println("7.Exit ");
             System.out.println("*****************");
             System.out.println("ENTER YOUR CHOICE:--");
             Scanner sc=new Scanner(System.in);
@@ -159,7 +160,36 @@ public class bloodbank {
                         System.out.println((e));
                     }
                     break;
-                case  6:
+                case 6:
+                    System.out.println("Search name of name by character");
+                    System.out.println("enther a letter ");
+                    String character=sc.next();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con= DriverManager.getConnection("jdbc:mysql://localhost:3306/bloodbank1","root","");
+                        String sql="SELECT `donername`, `place`, `bloodgroup`, `age`, `phone` FROM `bloodbank` WHERE `donername` LIKE '"+character+"%'";
+                        Statement stmt=con.createStatement();
+                        ResultSet rs=stmt.executeQuery(sql);
+                        while ((rs.next())) {
+                            String getdonername= rs.getString(("donername"));
+                            String getplace = rs.getString(("place"));
+                            String getbloodgroup = rs.getString(("bloodgroup"));
+                            String getage = rs.getString(("age"));
+                            String getphone = rs.getString(("phone"));
+                            System.out.println("Doner Name=" + getdonername);
+                            System.out.println("place=" + getplace);
+                            System.out.println("bloodgroup=" + getbloodgroup);
+                            System.out.println("age=" + getage);
+                            System.out.println("phone=" + getphone);
+                            System.out.println("\n");
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
+                    break;
+
+                case  7:
                     System.exit(0);
                     break;
             }
